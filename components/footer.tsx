@@ -141,7 +141,7 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="grid grid-cols-[180px_1fr]">
+            <div className="grid grid-cols-[250px_1fr]">
               <div className="border-r border-border px-3 py-3">
                 <Logo />
                 <p className="mt-3 font-sans text-[9px] normal-case tracking-[0.04em] text-muted-foreground">
