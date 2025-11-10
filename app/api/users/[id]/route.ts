@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma'
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions)
 
@@ -13,7 +13,8 @@ export async function PATCH(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  if (!canEditUser(session.user.id, params.id, session.user.role)) {
+  const { id } = await params
+  if (!canEditUser(session.user.id, id, session.user.role)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -22,7 +23,7 @@ export async function PATCH(
     const { name, education, yearsExperience, bio, linkedInUrl } = body
 
     const updatedUser = await prisma.user.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         name,
         education,

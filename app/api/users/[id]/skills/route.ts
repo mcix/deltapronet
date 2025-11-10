@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma'
 
 export async function POST(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions)
 
@@ -13,7 +13,8 @@ export async function POST(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  if (!canEditUser(session.user.id, params.id, session.user.role)) {
+  const { id } = await params
+  if (!canEditUser(session.user.id, id, session.user.role)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -23,14 +24,14 @@ export async function POST(
 
     // Delete all existing skills for this user
     await prisma.userSkill.deleteMany({
-      where: { userId: params.id },
+      where: { userId: id },
     })
 
     // Create new skills
     if (skills && skills.length > 0) {
       await prisma.userSkill.createMany({
         data: skills.map((skill) => ({
-          userId: params.id,
+          userId: id,
           skillId: skill.skillId,
           rating: Math.max(1, Math.min(5, skill.rating)), // Ensure rating is 1-5
         })),
@@ -38,7 +39,7 @@ export async function POST(
     }
 
     const updatedSkills = await prisma.userSkill.findMany({
-      where: { userId: params.id },
+      where: { userId: id },
       include: {
         skill: {
           include: {

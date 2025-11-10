@@ -9,8 +9,20 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Link from 'next/link'
 import { Plus, MessageSquare, Users, HelpCircle } from 'lucide-react'
+import type { Prisma } from '@prisma/client'
 
-async function getPendingContent() {
+type CommentWithRelations = Prisma.CommentGetPayload<{
+  include: { author: true; target: true }
+}>
+
+type QuestionWithRelations = Prisma.QuestionGetPayload<{
+  include: { author: true; _count: { select: { answers: true } } }
+}>
+
+async function getPendingContent(): Promise<{
+  comments: CommentWithRelations[]
+  questions: QuestionWithRelations[]
+}> {
   const [comments, questions] = await Promise.all([
     prisma.comment.findMany({
       where: { approved: false },

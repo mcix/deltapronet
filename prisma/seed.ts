@@ -220,40 +220,42 @@ async function main() {
   console.log('✅ Created Software skills and languages')
 
   // Create initial users (unclaimed profiles)
-  const user1 = await prisma.user.upsert({
-    where: { linkedInUrl: 'https://www.linkedin.com/in/avanderheijde/' },
-    update: {},
-    create: {
-      name: 'A. van der Heijde',
-      linkedInUrl: 'https://www.linkedin.com/in/avanderheijde/',
-      claimed: false,
+  const existingUsers = await prisma.user.findMany({
+    where: {
+      linkedInUrl: {
+        in: [
+          'https://www.linkedin.com/in/avanderheijde/',
+          'https://www.linkedin.com/in/choogendijk/',
+          'https://www.linkedin.com/in/michiel-wanninkhof-0443488a/',
+        ],
+      },
     },
   })
 
-  const user2 = await prisma.user.upsert({
-    where: { linkedInUrl: 'https://www.linkedin.com/in/choogendijk/' },
-    update: {},
-    create: {
-      name: 'C. Hoogendijk',
-      linkedInUrl: 'https://www.linkedin.com/in/choogendijk/',
-      claimed: false,
-    },
-  })
+  const initialUsers = [
+    { name: 'A. van der Heijde', linkedInUrl: 'https://www.linkedin.com/in/avanderheijde/' },
+    { name: 'C. Hoogendijk', linkedInUrl: 'https://www.linkedin.com/in/choogendijk/' },
+    { name: 'M. Wanninkhof', linkedInUrl: 'https://www.linkedin.com/in/michiel-wanninkhof-0443488a/' },
+  ]
 
-  const user3 = await prisma.user.upsert({
-    where: { linkedInUrl: 'https://www.linkedin.com/in/michiel-wanninkhof-0443488a/' },
-    update: {},
-    create: {
-      name: 'M. Wanninkhof',
-      linkedInUrl: 'https://www.linkedin.com/in/michiel-wanninkhof-0443488a/',
-      claimed: false,
-    },
-  })
+  for (const userData of initialUsers) {
+    if (!existingUsers.some(u => u.linkedInUrl === userData.linkedInUrl)) {
+      await prisma.user.create({
+        data: {
+          name: userData.name,
+          linkedInUrl: userData.linkedInUrl,
+          claimed: false,
+        },
+      })
+      console.log(`   - ${userData.name}`)
+    }
+  }
+
+  const user1 = await prisma.user.findFirst({ where: { linkedInUrl: initialUsers[0].linkedInUrl } })
+  const user2 = await prisma.user.findFirst({ where: { linkedInUrl: initialUsers[1].linkedInUrl } })
+  const user3 = await prisma.user.findFirst({ where: { linkedInUrl: initialUsers[2].linkedInUrl } })
 
   console.log('✅ Created initial user profiles')
-  console.log(`   - ${user1.name}`)
-  console.log(`   - ${user2.name}`)
-  console.log(`   - ${user3.name}`)
 
   console.log('🎉 Database seed completed!')
 }

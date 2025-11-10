@@ -22,6 +22,8 @@ export const authOptions: NextAuthOptions = {
           email: profile.email,
           image: profile.picture,
           linkedInUrl: profile.sub ? `https://www.linkedin.com/in/${profile.sub}` : null,
+          role: 'USER' as const,
+          claimed: false,
         }
       },
     }),

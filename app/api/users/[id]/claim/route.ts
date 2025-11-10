@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma'
 
 export async function POST(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions)
 
@@ -14,8 +14,9 @@ export async function POST(
   }
 
   try {
+    const { id } = await params
     const user = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id },
     })
 
     if (!user) {
@@ -36,7 +37,7 @@ export async function POST(
 
     // Claim the profile
     const updatedUser = await prisma.user.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         email: session.user.email,
         image: session.user.image,
