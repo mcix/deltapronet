@@ -90,11 +90,12 @@ async function getTopSkills() {
 }
 
 interface PageProps {
-  searchParams: { search?: string; area?: string; skill?: string }
+  searchParams: Promise<{ search?: string; area?: string; skill?: string }>
 }
 
 export default async function PeoplePage({ searchParams }: PageProps) {
-  const users = await getUsers(searchParams)
+  const params = await searchParams
+  const users = await getUsers(params)
   const expertiseAreas = await getExpertiseAreas()
   const topSkills = await getTopSkills()
 
@@ -118,7 +119,7 @@ export default async function PeoplePage({ searchParams }: PageProps) {
                 <Input
                   name="search"
                   placeholder="Search by name..."
-                  defaultValue={searchParams.search}
+                  defaultValue={params.search}
                   className="pl-10"
                 />
               </div>
@@ -131,7 +132,7 @@ export default async function PeoplePage({ searchParams }: PageProps) {
                 <div className="flex flex-wrap gap-2">
                   <Link href="/people">
                     <Badge
-                      variant={!searchParams.area ? 'default' : 'outline'}
+                      variant={!params.area ? 'default' : 'outline'}
                       className="cursor-pointer"
                     >
                       All
@@ -143,7 +144,7 @@ export default async function PeoplePage({ searchParams }: PageProps) {
                       href={`/people?area=${encodeURIComponent(area.name)}`}
                     >
                       <Badge
-                        variant={searchParams.area === area.name ? 'default' : 'outline'}
+                        variant={params.area === area.name ? 'default' : 'outline'}
                         className="cursor-pointer"
                       >
                         {area.name}
@@ -165,7 +166,7 @@ export default async function PeoplePage({ searchParams }: PageProps) {
                       href={`/people?skill=${encodeURIComponent(skill.name)}`}
                     >
                       <Badge
-                        variant={searchParams.skill === skill.name ? 'default' : 'secondary'}
+                        variant={params.skill === skill.name ? 'default' : 'secondary'}
                         className="cursor-pointer"
                       >
                         {skill.name}
@@ -175,7 +176,7 @@ export default async function PeoplePage({ searchParams }: PageProps) {
                 </div>
               </div>
 
-              {(searchParams.search || searchParams.area || searchParams.skill) && (
+              {(params.search || params.area || params.skill) && (
                 <div className="flex items-center justify-between pt-2 border-t">
                   <span className="text-sm text-muted-foreground">
                     {users.length} result{users.length !== 1 ? 's' : ''} found

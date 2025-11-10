@@ -12,9 +12,10 @@ async function getUser(id: string) {
   })
 }
 
-export default async function ClaimProfilePage({ params }: { params: { id: string } }) {
+export default async function ClaimProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions)
-  const user = await getUser(params.id)
+  const { id } = await params
+  const user = await getUser(id)
 
   if (!session) {
     redirect('/api/auth/signin')

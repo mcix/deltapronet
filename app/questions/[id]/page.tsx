@@ -27,9 +27,10 @@ async function getQuestion(id: string) {
   })
 }
 
-export default async function QuestionDetailPage({ params }: { params: { id: string } }) {
+export default async function QuestionDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions)
-  const question = await getQuestion(params.id)
+  const { id } = await params
+  const question = await getQuestion(id)
 
   if (!question) {
     notFound()
