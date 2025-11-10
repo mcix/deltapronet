@@ -62,7 +62,7 @@ export default async function QuestionsPage() {
           <div className="space-y-4">
             {questions.map((question) => (
               <Link key={question.id} href={`/questions/${question.id}`}>
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <Card className="hover:shadow-none transition-shadow cursor-pointer">
                   <CardHeader>
                     <div className="flex items-start gap-4">
                       <Avatar className="h-10 w-10 shrink-0">

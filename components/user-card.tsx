@@ -31,7 +31,7 @@ export function UserCard({ user }: UserCardProps) {
 
   return (
     <Link href={`/people/${user.id}`}>
-      <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer">
+      <Card className="h-full hover:shadow-none transition-all hover:-translate-y-1 cursor-pointer">
         <CardHeader>
           <div className="flex items-start gap-4">
             <Avatar className="h-14 w-14 shrink-0">

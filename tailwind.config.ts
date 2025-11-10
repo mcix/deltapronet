@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Arial', 'Helvetica', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        technical: ['var(--font-isocpeur)', 'Courier New', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,6 +55,40 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        brand: {
+          fine: {
+            DEFAULT: "hsl(var(--brand-grid-fine))",
+            foreground: "hsl(var(--brand-grid-fine-foreground))",
+          },
+          medium: {
+            DEFAULT: "hsl(var(--brand-grid-medium))",
+            foreground: "hsl(var(--brand-grid-medium-foreground))",
+          },
+          major: {
+            DEFAULT: "hsl(var(--brand-grid-major))",
+            foreground: "hsl(var(--brand-grid-major-foreground))",
+          },
+        },
+        system: {
+          red: "var(--systemRed)",
+          orange: "var(--systemOrange)",
+          yellow: "var(--systemYellow)",
+          green: "var(--systemGreen)",
+          mint: "var(--systemMint)",
+          teal: "var(--systemTeal)",
+          cyan: "var(--systemCyan)",
+          blue: "var(--systemBlue)",
+          indigo: "var(--systemIndigo)",
+          purple: "var(--systemPurple)",
+          pink: "var(--systemPink)",
+          brown: "var(--systemBrown)",
+          gray: "var(--systemGray)",
+          primary: "var(--systemPrimary)",
+          secondary: "var(--systemSecondary)",
+          tertiary: "var(--systemTertiary)",
+          quaternary: "var(--systemQuaternary)",
+          quinary: "var(--systemQuinary)",
         },
       },
       borderRadius: {

@@ -1,40 +1,47 @@
 @import "tailwindcss";
+@import "../colorscheme.css";
 
 @layer base {
   :root {
-    /* Border radius - using radius-large (17px) for cards */
-    --radius: 17px;
+    /* Brand palette derived from grid.svg */
+    --brand-grid-fine: 35 82% 80%;
+    --brand-grid-fine-foreground: 29 64% 19%;
+    --brand-grid-medium: 33 87% 62%;
+    --brand-grid-medium-foreground: 34 77% 17%;
+    --brand-grid-major: 29 81% 49%;
+    --brand-grid-major-foreground: 0 0% 100%;
     
-    /* shadcn color mappings from colorscheme.css */
+    /* Application surface tokens */
+    --radius: 17px;
     --background: 0 0% 100%;
-    --foreground: 0 0% 15%;
+    --foreground: 32 51% 18%;
     
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 15%;
+    --card-foreground: var(--foreground);
     
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 15%;
+    --popover-foreground: var(--foreground);
     
-    --primary: 211 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: var(--brand-grid-major);
+    --primary-foreground: var(--brand-grid-major-foreground);
     
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 15%;
+    --secondary: var(--brand-grid-medium);
+    --secondary-foreground: var(--brand-grid-medium-foreground);
     
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 35 87% 94%;
+    --muted-foreground: 35 42% 31%;
     
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 15%;
+    --accent: var(--brand-grid-fine);
+    --accent-foreground: var(--brand-grid-fine-foreground);
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
-    --ring: 211 100% 50%;
-    
-    /* Import custom variables from colorscheme.css */
+    --border: 37 72% 83%;
+    --input: var(--border);
+    --ring: var(--brand-grid-major);
+
+    /* Spacing & radius tokens */
     --bodyGutter: 25px;
     --moduleGutter: 30px;
     --global-border-radius-xsmall: 5px;
@@ -43,70 +50,90 @@
     --global-border-radius-large: 17px;
     --global-border-radius-xlarge: 24px;
     
-    --systemRed: #ff3b30;
-    --systemOrange: #ff9500;
-    --systemYellow: #ffcc00;
-    --systemGreen: #28cd41;
-    --systemBlue: #007aff;
-    --systemIndigo: #5856d6;
-    --systemPurple: #af52de;
-    --systemPink: #ff2d55;
-    
-    --labelDivider: rgba(0, 0, 0, 0.15);
+    --labelDivider: rgba(0, 0, 0, 0.12);
     --pageBG: #fff;
     --pageBg: #f5f5f7;
   }
 
   .dark {
-    --background: 0 0% 12%;
-    --foreground: 0 0% 98%;
-    
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 98%;
-    
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 98%;
-    
-    --primary: 211 100% 50%;
-    --primary-foreground: 0 0% 100%;
-    
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-    
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-    
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-    
+    --brand-grid-fine: 33 70% 35%;
+    --brand-grid-fine-foreground: 34 75% 90%;
+    --brand-grid-medium: 33 72% 44%;
+    --brand-grid-medium-foreground: 34 78% 92%;
+    --brand-grid-major: 29 88% 56%;
+    --brand-grid-major-foreground: 34 90% 96%;
+
+    --background: 30 22% 10%;
+    --foreground: 36 56% 94%;
+
+    --card: 30 24% 14%;
+    --card-foreground: var(--foreground);
+
+    --popover: 30 24% 12%;
+    --popover-foreground: var(--foreground);
+
+    --primary: var(--brand-grid-major);
+    --primary-foreground: var(--brand-grid-major-foreground);
+
+    --secondary: var(--brand-grid-medium);
+    --secondary-foreground: var(--brand-grid-medium-foreground);
+
+    --muted: 32 20% 18%;
+    --muted-foreground: 35 55% 78%;
+
+    --accent: var(--brand-grid-fine);
+    --accent-foreground: var(--brand-grid-fine-foreground);
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
-    --border: 0 0% 24%;
-    --input: 0 0% 24%;
-    --ring: 211 100% 50%;
-    
-    --systemRed: #ff453a;
-    --systemOrange: #ff9f0a;
-    --systemYellow: #ffd60a;
-    --systemGreen: #32d74b;
-    --systemBlue: #0a84ff;
-    --systemIndigo: #5e5ce6;
-    --systemPurple: #bf5af2;
-    --systemPink: #ff375f;
-    
-    --labelDivider: rgba(255, 255, 255, 0.1);
+
+    --border: 30 22% 24%;
+    --input: var(--border);
+    --ring: var(--brand-grid-major);
+
+    --labelDivider: rgba(255, 255, 255, 0.16);
     --pageBG: #1f1f1f;
     --pageBg: #151515;
   }
 }
 
 * {
-  border-color: var(--border);
+  border-color: hsl(var(--border));
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  background-image:
+    radial-gradient(
+      circle at 75% 20%,
+      hsl(var(--brand-grid-medium) / 0.35),
+      transparent 65%
+    ),
+    linear-gradient(
+      hsl(var(--background) / 0.92),
+      hsl(var(--background) / 0.92)
+    ),
+    url("/grid.svg");
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: 900px 900px, 100% 100%, 420px 420px;
+  background-position: top right, center, center;
+  background-attachment: fixed, fixed, fixed;
+  background-blend-mode: normal, lighten, normal;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(
+      circle at 70% 18%,
+      hsl(var(--brand-grid-major) / 0.35),
+      transparent 60%
+    ),
+    linear-gradient(
+      hsl(var(--background) / 0.75),
+      hsl(var(--background) / 0.75)
+    ),
+    url("/grid.svg");
+  background-size: 820px 820px, 100% 100%, 420px 420px;
 }
 

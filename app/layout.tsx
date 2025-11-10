@@ -1,11 +1,16 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { Providers } from '@/components/providers'
+import localFont from 'next/font/local'
 
-const inter = Inter({ subsets: ['latin'] })
+const isocpeur = localFont({
+  src: '../public/fonts/ISOCPEUR.woff2',
+  variable: '--font-isocpeur',
+  display: 'swap',
+  weight: '400',
+})
 
 export const metadata: Metadata = {
   title: 'DeltaProNet - Skills Database',
@@ -41,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${isocpeur.variable} font-sans`}>
         <Providers>
           <div className="flex flex-col min-h-screen">
             <Navigation />

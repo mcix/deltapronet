@@ -49,7 +49,7 @@ export function Navigation() {
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                  <Button variant="ghost" className="relative h-10 w-10 rounded-none">
                     <Avatar>
                       <AvatarImage src={session.user.image || ''} alt={session.user.name || ''} />
                       <AvatarFallback>

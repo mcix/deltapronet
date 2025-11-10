@@ -5,7 +5,7 @@
     --global-border-radius-small: 9px;
     --global-border-radius-medium: 12px;
     --global-border-radius-large: 17px;
-    --global-border-radius-xlarge: 24px
+    --global-border-radius-xlarge: 24px;
 }
 
 :root {
@@ -233,7 +233,7 @@
     --modalCloseButtonBGColor-rollover: #ececf0;
     --modalCloseButtonBGColor-pressed: #dfdfe4;
     --pageBg: #f5f5f7;
-    --pageBg-rgb: 245,245,247
+    --pageBg-rgb: 245,245,247;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -449,5 +449,6 @@
         --modalCloseButtonBGColor-rollover: #37373a;
         --modalCloseButtonBGColor-pressed: #2f2f32;
         --pageBg: #151515;
-        --pageBg-rgb: 21,21,21
+        --pageBg-rgb: 21,21,21;
     }
+}

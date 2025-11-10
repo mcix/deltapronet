@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="210mm" height="297mm" viewBox="0 0 210 297"
+     version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <!-- Background -->
+  <rect x="0" y="0" width="210" height="297" fill="#ffffff"/>
+
+  <!-- Fine 1 mm grid (very light orange) -->
+  <pattern id="grid-1mm" patternUnits="userSpaceOnUse" width="1" height="1">
+    <!-- vertical -->
+    <line x1="0" y1="0" x2="0" y2="1"
+          stroke="#F6D4A4" stroke-width="0.06" stroke-linecap="square" />
+    <!-- horizontal -->
+    <line x1="0" y1="0" x2="1" y2="0"
+          stroke="#F6D4A4" stroke-width="0.06" stroke-linecap="square" />
+  </pattern>
+
+  <!-- Medium 5 mm grid (medium orange) -->
+  <pattern id="grid-5mm" patternUnits="userSpaceOnUse" width="5" height="5">
+    <!-- vertical -->
+    <line x1="0" y1="0" x2="0" y2="5"
+          stroke="#F2A84B" stroke-width="0.22" stroke-linecap="square" />
+    <!-- horizontal -->
+    <line x1="0" y1="0" x2="5" y2="0"
+          stroke="#F2A84B" stroke-width="0.22" stroke-linecap="square" />
+  </pattern>
+
+  <!-- Major 50 mm grid (darker orange) -->
+  <pattern id="grid-50mm" patternUnits="userSpaceOnUse" width="50" height="50">
+    <!-- vertical -->
+    <line x1="0" y1="0" x2="0" y2="50"
+          stroke="#E07A18" stroke-width="0.45" stroke-linecap="square" />
+    <!-- horizontal -->
+    <line x1="0" y1="0" x2="50" y2="0"
+          stroke="#E07A18" stroke-width="0.45" stroke-linecap="square" />
+  </pattern>
+
+  <!-- Draw grids from finest to coarsest so heavier lines appear on top -->
+  <rect x="0" y="0" width="210" height="297" fill="url(#grid-1mm)"/>
+  <rect x="0" y="0" width="210" height="297" fill="url(#grid-5mm)"/>
+  <rect x="0" y="0" width="210" height="297" fill="url(#grid-50mm)"/>
+
+</svg>
